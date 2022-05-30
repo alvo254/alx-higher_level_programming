@@ -1,3 +1,5 @@
 #!/usr/bin/python3
-import this                                   
-print(this)                           
+import this
+import * from this
+from this import *
+print(this)

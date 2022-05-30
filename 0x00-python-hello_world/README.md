@@ -79,3 +79,9 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 Pycodestyle
 Pycodestyle is now the new standard of Python style code
+
+"""Python stderr is known as a standard error stream. It is similar 
+to stdout because it also directly prints to the console but the 
+main difference is that it only prints error messages. After 
+writing the above code (python print to stderr), you can observe 
+that it print debug message using sys. stderr"""

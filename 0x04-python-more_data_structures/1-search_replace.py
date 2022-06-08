@@ -8,4 +8,4 @@ def search_replace(my_list, search, replace):
             list.append(my_list[i])
     return list
 
-search_replace(my_list,5,2)
+search_replace(2,5,2)

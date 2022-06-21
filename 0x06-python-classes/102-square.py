@@ -1,53 +1,85 @@
 #!/usr/bin/python3
+
+
 class Square:
-    """Represents a square.
-    Private instance attribute: size:
-        - property def size(self)
-        - property setter def size(self, value)
-    Instantiation with optional size.
-    Public instance method: def area(self).
-    """
-
+    ''' class representing a square
+    '''
     def __init__(self, size=0):
-        """Initializes the data."""
-        self.__size = size
-
-    def __eq__(self, other):
-        """Equal."""
-        if hasattr(other, 'size'):
-            return self.__size == other.__size
-        return self.__size == other
-
-    def __ne__(self, other):
-        """Not equal."""
-        return not self.__eq__(other)
+        ''' method initializing a square of size size
+        '''
+        if isinstance(size, int) is False:
+            raise TypeError('size must be an integer')
+        elif size < 0:
+            raise ValueError('size must be >= 0')
+        else:
+            self.__size = size
 
     def __lt__(self, other):
-        """Less than."""
-        if hasattr(other, 'size'):
-            return self.__size < other.__size
-        return self.__size < other
+        ''' method for <
+        '''
+        if self.__size < other.__size:
+            return True
+        else:
+            return False
 
     def __le__(self, other):
-        """Less than or equal."""
-        if hasattr(other, 'size'):
-            return self.__size <= other.__size
-        return self.__size <= other
+        ''' method for <=
+        '''
+        if self.__size <= other.__size:
+            return True
+        else:
+            return False
+
+    def __gt__(self, other):
+        ''' method for >
+        '''
+        if self.__size > other.__size:
+            return True
+        else:
+            return False
+
+    def __ge__(self, other):
+        ''' method for >=
+        '''
+        if self.__size >= other.__size:
+            return True
+        else:
+            return False
+
+    def __eq__(self, other):
+        ''' method for ==
+        '''
+        if self.__size == other.__size:
+            return True
+        else:
+            return False
+
+    def __ne__(self, other):
+        ''' method for !=
+        '''
+        if self.__size != other.__size:
+            return True
+        else:
+            return False
 
     @property
     def size(self):
-        """Retrieves the size."""
+        ''' method that returns the size of the square
+        '''
         return self.__size
 
     @size.setter
     def size(self, value):
-        """Sets the size to a value."""
-        if not isinstance(value, int) or not isinstance(value, float):
-            raise TypeError("size must be a number")
+        ''' method that sets the size of the square
+        '''
+        if isinstance(value, int) is False:
+            raise TypeError('size must be an integer')
         elif value < 0:
-            raise ValueError("size must be >= 0")
-        self.__size = value
+            raise ValueError('size must be >= 0')
+        else:
+            self.__size = value
 
     def area(self):
-        """Returns the current square area."""
-        return self.__size ** 2
+        ''' method that returns area of the square
+        '''
+        return self.__size * self.__size

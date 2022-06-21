@@ -2,82 +2,75 @@
 
 
 class Node:
-    """Node of a singly linked list.
-    Private instance attribute: data:
-        - property def data(self)
-        - property setter def data(self, value)
-    Private instance attribute: next_node:
-        - property def next_node(self)
-        - property setter def next_node(self, value)
-    Instantiation with data and next_node.
-    """
-
+    ''' node of a singly linked list
+    '''
     def __init__(self, data, next_node=None):
-        """Initializes the data of the node."""
+        ''' initialized a node
+        '''
         self.data = data
         self.next_node = next_node
 
     @property
     def data(self):
-        """Retrieves the data from the node."""
+        ''' method that returns the data of a node
+        '''
         return self.__data
 
     @data.setter
     def data(self, value):
-        """Sets the data into a node."""
-        if not isinstance(value, int):
-            raise TypeError("data must be an integer")
-        self.__data = value
+        ''' method that sets the data of a node
+        '''
+        if isinstance(value, int) is False:
+            raise TypeError('data must be an integer')
+        else:
+            self.__data = value
 
     @property
     def next_node(self):
-        """Retrieves the next_node."""
+        ''' method that returns the next node
+        '''
         return self.__next_node
 
     @next_node.setter
     def next_node(self, value):
-        """Sets the next_node."""
-        if not isinstance(value, Node) and value is not None:
-            raise TypeError("next_node must be a Node object")
-        self.__next_node = value
+        ''' method that sets the next node
+        '''
+        if value is not None and isinstance(value, Node) is False:
+            raise TypeError('next_node must be a Node object')
+        else:
+            self.__next_node = value
 
 
 class SinglyLinkedList:
-    """ Singly linked list.
-    Private instance attribute: head.
-    Simple instantiation.
-    Public instance method: def sorted_insert(self, value).
-    """
-
+    ''' a singly linked list
+    '''
     def __init__(self):
-        """Initializes the linked list."""
-        self.head = None
-
-    def __str__(self):
-        """For the print statement in the main file."""
-        my_str = ""
-        node = self.head
-        while node:
-            my_str += str(node.data)
-            my_str += '\n'
-            node = node.next_node
-        return my_str[:-1]
+        ''' initializes a singly linked list
+        '''
+        self.__head = None
 
     def sorted_insert(self, value):
-        """Inserts a node in a sorted linked list."""
-        new_node = Node(value)
+        ''' method that inserts a node into a linked list
+        '''
+        if self.__head is None:
+            self.__head = Node(value, None)
+        elif value <= self.__head.data:
+            new = Node(value, self.__head)
+            self.__head = new
+        else:
+            ptr = self.__head
+            while ptr.next_node is not None and ptr.next_node.data <= value:
+                ptr = ptr.next_node
 
-        if self.head is None:
-            self.head = new_node
-            return
+            tmp = ptr.next_node
+            ptr.next_node = Node(value, tmp)
 
-        if value < self.head.data:
-            new_node.next_node = self.head
-            self.head = new_node
-            return
-
-        node = self.head
-        while node.next_node and node.next_node.data < value:
-            node = node.next_node
-        new_node.next_node = node.next_node
-        node.next_node = new_node
+    def __str__(self):
+        ''' the printable representation of the linked list
+        '''
+        ptr = self.__head
+        toprint = ''
+        while ptr is not None:
+            toprint = toprint + str(ptr.data) + '\n'
+            ptr = ptr.next_node
+        return toprint[:-1]
